@@ -1,0 +1,90 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+
+<div class="category-bar">
+    {% for i in category %}
+    <form action="" class="cat-form">
+        <input type="submit" name="cat" value="{{i}}" class="cat-btn">
+    </form>
+    {% endfor %}
+    <a href="{% url 'home' %}" class="all-products-link">all products</a>
+</div>
+
+
+<!-- slide bar -->
+
+<div class="auto-scroll-container">
+    <h2 style="padding-left: 20px;">Deals of the day</h2>
+    <div class="scroll-wrapper">
+        {% for i in data %}
+        <div class="scroll-card">
+            <img src="{{i.pimages.url}}" alt="{{i.pname}}">
+            <div class="scroll-card-info">
+                <h4>{{i.pname|truncatechars:15}}</h4>
+                <p class="price">₹{{i.price}}</p>
+                <span class="offer-tag">Min. 40% Off</span>
+            </div>
+        </div>
+        {% endfor %}
+        
+        {% for i in data %}
+        <div class="scroll-card">
+            <img src="{{i.pimages.url}}" alt="{{i.pname}}">
+            <div class="scroll-card-info">
+                <h4>{{i.pname|truncatechars:15}}</h4>
+                <p class="price">₹{{i.price}}</p>
+                <span class="offer-tag">Min. 40% Off</span>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- hero section -->
+<div class="hero-container">
+    <div class="hero-image">
+        <img src="{% static 'images/uploads/hero.jpg' %}" alt="Sale Banner">
+        <div class="hero-text">
+            <h1>Biggest Festive Sale!</h1>
+            <p>Grab the best deals on electronics & fashion</p>
+        </div>
+    </div>
+</div>
+
+
+<div class="home-container">
+    <div class="status-messages">
+        {% if nomatch %}
+            <h1 class="error-msg">no records found</h1>
+        {% endif %}
+
+        {% if trend %}
+            <h1 class="badge trending-badge">trending now...!</h1>
+        {% endif %}
+
+        {% if offer %}
+            <h1 class="badge offer-badge">50% off..!</h1>
+        {% endif %}
+    </div>
+
+    <div class="product-grid">
+        {% for i in data %}
+        <div class="product-card">
+            <div class="product-image">
+                <img src="{{i.pimages.url}}">
+            </div>
+            <div class="product-info">
+                <h3 class="product-name">{{i.pname}}</h3>
+                <p class="product-price">₹{{i.price}}</p>
+                
+                <div class="product-actions">
+                    <a href="{% url 'addtocart' i.id %}" class="btn add-btn">add to cart</a>
+                    <a href="" class="btn details-btn">details</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

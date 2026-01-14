@@ -1,0 +1,74 @@
+<nav class="navbar">
+    <div class="logo">
+        <h1>shopshere</h1>
+    </div>
+    <div class="links-container">
+        {% if request.user.is_authenticated %}
+            {% if profile_nav %}
+                <div class="nav-links">
+                    <a href="{% url 'home' %}">home</a>
+                    <a href="{% url 'cart' %}">cart({{cartproducts_count}})</a>
+                    <a href="{% url 'support' %}">support</a>
+                    <a href="{% url 'know_us' %}">know us</a>
+                    <a href="{% url 'logout_' %}">logout</a>
+                    <a href="{% url 'profile' %}">profile({{request.user}})</a>
+                </div>
+            {% else %}
+                <form action="" class="search-form">
+                    {% csrf_token %}
+                    <input type="text" name="q" placeholder="Search products...">
+                    <button type="submit">search</button>
+                </form>
+
+                <form action="" class="btn-form">
+                    <input type="submit" name="trending" value="trending" class="nav-btn trending">
+                </form>
+
+                <form action="" class="btn-form">
+                    <input type="submit" name="offer" value="offer" class="nav-btn offer">
+                </form>
+
+                <div class="nav-links">
+                    <a href="{% url 'home' %}">home</a>
+                    <a href="{% url 'cart' %}">cart({{cartproducts_count}})</a>
+                    <a href="{% url 'support' %}">support</a>
+                    <a href="{% url 'know_us' %}">know us</a>
+                    <a href="{% url 'logout_' %}">logout</a>
+                    <a href="{% url 'profile' %}">profile({{request.user}})</a>
+                </div>
+            {% endif %}
+
+        {% else %}
+            {% if login_nav %}
+                <div class="nav-links">
+                    <a href="{% url 'home' %}">home</a>
+                    <a href="{% url 'support' %}">support</a>
+                    <a href="{% url 'know_us' %}">know us</a>
+                    <a href="{% url 'login_' %}">login</a>
+                    <a href="{% url 'register' %}">register</a>
+                </div>
+            {% else %}
+                <form action="" class="search-form">
+                    <input type="text" name="q" placeholder="Search products...">
+                    <button type="submit">search</button>
+                </form>
+
+                <form action="" class="btn-form">
+                    <input type="submit" name="trending" value="trending" class="nav-btn trending">
+                </form>
+
+                <form action="" class="btn-form">
+                    <input type="submit" name="offer" value="offer" class="nav-btn offer">
+                </form>
+
+                <div class="nav-links">
+                    <a href="{% url 'home' %}">home</a>
+                    <a href="{% url 'support' %}">support</a>
+                    <a href="{% url 'know_us' %}">know us</a>
+                    <a href="{% url 'login_' %}">login</a>
+                    <a href="{% url 'register' %}">register</a>
+                </div>
+            {% endif %}
+        {% endif %}
+    </div>
+</nav>

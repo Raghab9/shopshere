@@ -1,0 +1,35 @@
+<footer class="main-footer">
+    <div class="footer-container">
+        <div class="footer-section brand-info">
+            <h2>shopshere</h2>
+            <p>Your one-stop destination for the latest trends and best offers. High quality products delivered to your doorstep.</p>
+        </div>
+
+        <div class="footer-section links">
+            <h3>Quick Links</h3>
+            <ul>
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'support' %}">Support</a></li>
+                <li><a href="{% url 'know_us' %}">Know Us</a></li>
+                {% if not request.user.is_authenticated %}
+                <li><a href="{% url 'login_' %}">Login</a></li>
+                {% endif %}
+            </ul>
+        </div>
+
+        <div class="footer-section contact">
+            <h3>Contact Us</h3>
+            <p>Email: support@shopshere.com</p>
+            <p>Phone: +91 12345 67890</p>
+            <div class="social-icons">
+                <span>Follow us on Social Media</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <p>&copy; 2024 shopshere. All Rights Reserved.</p>
+    </div>
+
+    <a href="#" class="top-btn">↑ Top</a>
+</footer>

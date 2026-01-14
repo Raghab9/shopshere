@@ -1,0 +1,32 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<div class="auth-wrapper">
+    <div class="auth-container">
+        <h1 class="auth-title">Set New Password</h1>
+
+        {% if error %}
+            <div class="error-banner">
+                <p>{{error}}</p>
+            </div>
+        {% endif %}
+
+        <p class="auth-instruction">Please enter a strong new password for your account.</p>
+
+        <form action="" method="POST" class="auth-form">
+            {% csrf_token %}
+
+            <div class="form-group">
+                <label for="">New Password</label>
+                <input type="password" name="password" id="" placeholder="Enter your new password" required>
+            </div>
+
+            <button type="submit" class="auth-btn">Update Password</button>
+            
+            <div class="auth-footer">
+                <a href="{% url 'login_' %}">Return to Login</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<div class="auth-wrapper">
+    <div class="auth-container">
+        <h1 class="auth-title">Update Password</h1>
+
+        {% if wrong %}
+            <div class="error-banner">
+                <p>Entered old password is wrong</p>
+            </div>
+        {% endif %}
+
+        <form action="" method="POST" class="auth-form">
+            {% csrf_token %}
+
+            <div class="form-group">
+                <label for="">Username</label>
+                <input type="text" name="username" id="" value="{{request.user}}" readonly class="readonly-input">
+            </div>
+
+            {% if newpass %}
+                <div class="form-group">
+                    <label for="">New Password</label>
+                    <input type="password" name="newpass" id="" placeholder="Enter your new password" required>
+                </div>
+            {% else %}
+                <div class="form-group">
+                    <label for="">Old Password</label>
+                    <input type="password" name="oldpass" id="" placeholder="Enter your old password" required>
+                </div>
+            {% endif %}
+
+            <button type="submit" class="auth-btn">Submit Changes</button>
+            
+            <div class="auth-footer">
+                <a href="{% url 'profile' %}">Cancel and go back</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

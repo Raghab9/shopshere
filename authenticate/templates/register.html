@@ -1,0 +1,42 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<div class="auth-wrapper">
+    <div class="auth-container">
+        <h1 class="auth-title">Create Account</h1>
+        
+        <form action="" method="POST" class="auth-form">
+            {% csrf_token %}
+
+            <div class="form-group">
+                <label for="">First Name</label>
+                <input type="text" name="first_name" id="" placeholder="Enter your first name">
+            </div>
+
+            <div class="form-group">
+                <label for="">Last Name</label>
+                <input type="text" name="last_name" id="" placeholder="Enter your last name">
+            </div>
+
+            <div class="form-group">
+                <label for="">Email Address</label>
+                <input type="email" name="email" id="" placeholder="example@mail.com">
+            </div>
+
+            <div class="form-group">
+                <label for="">Username</label>
+                <input type="text" name="username" id="" placeholder="Choose a username">
+            </div>
+
+            <div class="form-group">
+                <label for="">Password</label>
+                <input type="password" name="password" id="" placeholder="Create a password">
+            </div>
+
+            <button type="submit" class="auth-btn">Register</button>
+            
+            <p class="auth-footer">Already have an account? <a href="{% url 'login_' %}">Login here</a></p>
+        </form>
+    </div>
+</div>
+{% endblock %}

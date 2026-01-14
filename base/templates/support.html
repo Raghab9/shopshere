@@ -1,0 +1,43 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<div class="info-page-wrapper">
+    <div class="info-card">
+        <h1 class="page-title">Customer Support</h1>
+        <p class="subtitle">How can we help you today?</p>
+
+        <div class="support-grid">
+            <div class="support-form-section">
+                <h3>Send us a Message</h3>
+                <form action="" class="auth-form">
+                    <div class="form-group">
+                        <label>Your Name</label>
+                        <input type="text" placeholder="Enter your name">
+                    </div>
+                    <div class="form-group">
+                        <label>Your Email</label>
+                        <input type="email" placeholder="Enter your email">
+                    </div>
+                    <div class="form-group">
+                        <label>Message</label>
+                        <textarea rows="5" style="width:100%; border-radius:6px; border:1px solid #ddd; padding:10px;"></textarea>
+                    </div>
+                    <button type="submit" class="auth-btn">Submit Request</button>
+                </form>
+            </div>
+
+            <div class="faq-section">
+                <h3>Quick Help</h3>
+                <div class="faq-item">
+                    <h4>Where is my order?</h4>
+                    <p>You can track your order in the Profile section under "My Orders".</p>
+                </div>
+                <div class="faq-item">
+                    <h4>What is the return policy?</h4>
+                    <p>We offer a 30-day return policy on all electronic items.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

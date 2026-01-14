@@ -1,0 +1,41 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<div class="auth-wrapper">
+    <div class="auth-container">
+        <h1 class="auth-title">Update Profile</h1>
+        
+        <form action="" method="POST" class="auth-form">
+            {% csrf_token %}
+
+            <div class="form-group">
+                <label for="">First Name</label>
+                <input type="text" name="first_name" id="" value="{{data.first_name}}">
+            </div>
+
+            <div class="form-group">
+                <label for="">Last Name</label>
+                <input type="text" name="last_name" id="" value="{{data.last_name}}">
+            </div>
+
+            <div class="form-group">
+                <label for="">Email Address</label>
+                <input type="email" name="email" id="" value="{{data.email}}">
+            </div>
+
+            <div class="form-group">
+                <label for="">Username (Cannot be changed)</label>
+                <input type="text" name="username" id="" value="{{data.username}}" readonly class="readonly-input">
+            </div>
+
+            <button type="submit" class="auth-btn">Save Changes</button>
+        </form>
+
+        <div class="auth-footer">
+            <a href="{% url 'reset_pass' %}" class="reset-link">Want to change your password?</a>
+            <br><br>
+            <a href="{% url 'profile' %}">Back to Profile</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

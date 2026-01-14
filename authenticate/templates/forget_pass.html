@@ -1,0 +1,32 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<div class="auth-wrapper">
+    <div class="auth-container">
+        <h1 class="auth-title">Reset Password</h1>
+
+        {% if error %}
+            <div class="error-banner">
+                <p>user does not exist</p>
+            </div>
+        {% endif %}
+
+        <p class="auth-instruction">Enter your username to find your account and reset your password.</p>
+
+        <form action="" method="POST" class="auth-form">
+            {% csrf_token %}
+
+            <div class="form-group">
+                <label for="">Username</label>
+                <input type="text" name="username" id="" placeholder="Enter your registered username" required>
+            </div>
+
+            <button type="submit" class="auth-btn">Find Account</button>
+            
+            <div class="auth-footer">
+                <a href="{% url 'login_' %}">Back to Login</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
