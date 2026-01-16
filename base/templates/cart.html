@@ -41,7 +41,7 @@
 
     <div class="cart-summary">
         <h2>Total Amount: <span class="final-price">₹{{TA}}</span></h2>
-        <button class="checkout-btn">Proceed to Checkout</button>
+        <button class="checkout-btn"><a href="{% url 'checkout' %}" style="text-decoration: none; display: inline-block;">Proceed to Checkout</a></button>
     </div>
 </div>
 {% endblock %}

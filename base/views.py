@@ -1,5 +1,4 @@
 from django.shortcuts import render,redirect
-
 from .models import *
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
@@ -12,16 +11,11 @@ def home(request):
     else:
         cartproducts_count =False
 
-    #search op if no record are present 
-    
     nomatch=False
 
-    # for trending and offer button
     trend= False
     offer=False
 
-
-    # for search
     if 'q' in request.GET:
         q=request.GET['q']
         data= product.objects.filter(Q(pname__icontains = q)| Q(pdesc__icontains = q) | Q(pcategory__icontains=q))
@@ -126,10 +120,43 @@ def decrease(request,pk):
         return redirect('cart')
 
 
-# Support Page View
 def support(request):
-    return render(request, 'support.html')
+    context = {'profile_nav': True}
+    if request.user.is_authenticated:
+        context['cartproducts_count'] = cartmodel.objects.filter(host=request.user).count()
+    return render(request, 'support.html',context)
 
-# Know Us (About Us) Page View
 def know_us(request):
-    return render(request, 'know_us.html')
+    context = {'profile_nav': True}
+    
+    if request.user.is_authenticated:
+        context['cartproducts_count'] = cartmodel.objects.filter(host=request.user).count()
+    return render(request, 'know_us.html',context)
+
+
+
+
+def checkout(request):
+    if request.method == 'POST':
+        
+        address = request.POST.get('address')
+        city = request.POST.get('city')
+        pincode = request.POST.get('pincode')
+        phone = request.POST.get('phone')
+        
+        
+        cart_items = cartmodel.objects.filter(host=request.user)
+        total_amount = sum(item.totalprice for item in cart_items)
+
+        new_order = Order.objects.create(
+            user=request.user,
+            address=address,
+            city=city,
+            pincode=pincode,
+            phone=phone,
+            total_amount=total_amount
+        )
+        
+        return render(request, 'checkout.html', {'success': True})
+
+    return render(request, 'checkout.html')

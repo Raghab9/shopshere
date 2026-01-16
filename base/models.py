@@ -19,3 +19,14 @@ class cartmodel(models.Model):
     quantity=models.IntegerField()
     totalprice=models.IntegerField()
     host=models.ForeignKey(User,on_delete=models.CASCADE)
+
+class Order(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    address = models.TextField()
+    city = models.CharField(max_length=100)
+    pincode = models.CharField(max_length=10)
+    phone = models.CharField(max_length=12)
+    total_amount = models.FloatField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    

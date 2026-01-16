@@ -1,0 +1,44 @@
+{% extends 'main.html' %}
+{% block content %}
+<div class="checkout-container" style="max-width: 600px; margin: 50px auto; padding: 20px; border: 1px solid #ddd; border-radius: 10px;">
+    <h2 style="text-align: center;">Shipping Details</h2>
+    
+    <form method="POST">
+        {% csrf_token %}
+        <div style="margin-bottom: 15px;">
+            <label>Full Address</label>
+            <textarea name="address" class="form-control" required style="width: 100%; padding: 10px;"></textarea>
+        </div>
+        <div style="margin-bottom: 15px;">
+            <label>City</label>
+            <input type="text" name="city" class="form-control" required style="width: 100%; padding: 10px;">
+        </div>
+        <div style="margin-bottom: 15px;">
+            <label>Pincode</label>
+            <input type="text" name="pincode" class="form-control" required style="width: 100%; padding: 10px;">
+        </div>
+        <div style="margin-bottom: 15px;">
+            <label>Phone Number</label>
+            <input type="text" name="phone" class="form-control" required style="width: 100%; padding: 10px;">
+        </div>
+        
+        <button type="submit" style="width: 100%; background: #28a745; color: white; padding: 15px; border: none; cursor: pointer; font-size: 18px;">Place Order</button>
+    </form>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+{% if success %}
+<script>
+    Swal.fire({
+        title: "Order Placed!",
+        text: "Your order has been successfully placed.",
+        icon: "success",
+        confirmButtonText: "Go to Home"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            window.location.href = "{% url 'home' %}";
+        }
+    });
+</script>
+{% endif %}
+{% endblock %}
