@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-2@)kg9-l#mw1b$*fr(&dw4$9pph&c-rn7pn8x9^et*(k&@4*w@
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['*','https://shopshere-22x4.onrender.com']
 
 
 # Application definition
