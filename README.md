@@ -16,6 +16,8 @@ User Profile: View order history and manage user details.
 
 payment gateway using razorpay added sucsessfully.
 
+update javascript for dynamic effect.
+
 Admin Dashboard: A powerful interface for managing products, categories, and customer orders.
 
 Tech Stack
