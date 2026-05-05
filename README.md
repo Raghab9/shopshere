@@ -14,6 +14,8 @@ Checkout System: Integrated checkout process for placing orders.
 
 User Profile: View order history and manage user details.
 
+payment gateway using razorpay added sucsessfully.
+
 Admin Dashboard: A powerful interface for managing products, categories, and customer orders.
 
 Tech Stack
