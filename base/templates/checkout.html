@@ -3,7 +3,8 @@
 <div class="checkout-container" style="max-width: 600px; margin: 50px auto; padding: 20px; border: 1px solid #ddd; border-radius: 10px;">
     <h2 style="text-align: center;">Shipping Details</h2>
     
-    <form method="POST">
+    <!-- Step 1: Shipping Form -->
+    <form method="POST" id="shipping-form">
         {% csrf_token %}
         <div style="margin-bottom: 15px;">
             <label>Full Address</label>
@@ -15,30 +16,62 @@
         </div>
         <div style="margin-bottom: 15px;">
             <label>Pincode</label>
-            <input type="text" name="pincode" class="form-control" required style="width: 100%; padding: 10px;">
+            <input type="text" name="pincode" id="pincode" class="form-control" required style="width: 100%; padding: 10px;">
         </div>
         <div style="margin-bottom: 15px;">
             <label>Phone Number</label>
-            <input type="text" name="phone" class="form-control" required style="width: 100%; padding: 10px;">
+            <input type="text" name="phone" id="phone" class="form-control" required style="width: 100%; padding: 10px;">
         </div>
         
-        <button type="submit" style="width: 100%; background: #28a745; color: white; padding: 15px; border: none; cursor: pointer; font-size: 18px;">Place Order</button>
+        
+        {% if payment %}
+            <button type="button" id="pay-btn" style="width: 100%; background: #ff4757; color: white; padding: 15px; border: none; cursor: pointer; font-size: 18px; margin-top: 10px;">
+                Pay Now (₹{{TA}})
+            </button>
+        {% else %}
+            <button type="submit" style="width: 100%; background: #28a745; color: white; padding: 15px; border: none; cursor: pointer; font-size: 18px;">
+                Confirm Details & Pay
+            </button>
+        {% endif %}
     </form>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-{% if success %}
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
 <script>
-    Swal.fire({
-        title: "Order Placed!",
-        text: "Your order has been successfully placed.",
-        icon: "success",
-        confirmButtonText: "Go to Home"
-    }).then((result) => {
-        if (result.isConfirmed) {
-            window.location.href = "{% url 'home' %}";
+    {% if payment %}
+        // Razorpay Integration Logic
+        var options = {
+            "key": "{{ razorpay_key }}", 
+            "amount": "{{ payment.amount }}", 
+            "currency": "INR",
+            "name": "ShopSphere",
+            "description": "Purchase Transaction",
+            "order_id": "{{ payment.id }}", 
+            "handler": function (response){
+                
+                Swal.fire({
+                    title: "Payment Successful!",
+                    text: "Transaction ID: " + response.razorpay_payment_id,
+                    icon: "success"
+                }).then(() => {
+                    
+                    window.location.href = "{% url 'home' %}"; 
+                });
+            },
+            "prefill": {
+                "name": "{{ request.user.get_full_name }}",
+                "email": "{{ request.user.email }}"
+            },
+            "theme": { "color": "#ff4757" }
+        };
+
+        var rzp1 = new Razorpay(options);
+        document.getElementById('pay-btn').onclick = function(e){
+            rzp1.open();
+            e.preventDefault();
         }
-    });
+    {% endif %}
 </script>
-{% endif %}
 {% endblock %}

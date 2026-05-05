@@ -130,4 +130,8 @@ MEDIA_URL= '/images/'
 MEDIA_ROOT=BASE_DIR/'static/images'
 
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+
+RAZORPAY_KEY_ID = 'rzp_test_Slb5DuTU6MhZje'
+RAZORPAY_KEY_SECRET = 'vrT7S8S7Ot9DuVy1L21n78NV'

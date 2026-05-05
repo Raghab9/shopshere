@@ -52,7 +52,10 @@ def home(request):
 
     return render(request,'home.html',{'data':data,'nomatch':nomatch,'category':category,'cartproducts_count':cartproducts_count,'offer':offer,'trend':trend})
 
-login_required(login_url='login_')
+
+
+@login_required(login_url='login_')
+
 def addtocart(request,pk):
 
     item= product.objects.get(id=pk)
@@ -160,3 +163,24 @@ def checkout(request):
         return render(request, 'checkout.html', {'success': True})
 
     return render(request, 'checkout.html')
+
+
+
+import razorpay
+from django.conf import settings
+
+client = razorpay.Client(auth=(settings.RAZORPAY_KEY_ID, settings.RAZORPAY_KEY_SECRET))
+
+def checkout(request):
+    amount = 500 * 100  # Amount in paise (e.g., 500 INR)
+    data = { "amount": amount, "currency": "INR", "receipt": "order_rcptid_11" }
+    
+    # Razorpay Order Create karna
+    payment_order = client.order.create(data=data)
+    
+    context = {
+        'payment': payment_order,
+        'razorpay_key': settings.RAZORPAY_KEY_ID
+    }
+    return render(request, 'checkout.html', context)
+
